@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model WorkoutPlan {
+  id        Int           @id @default(autoincrement())
+  goal      String
+  days      String        // comma-separated days like "Mon,Wed,Fri"
+  equipment String?
+  createdAt DateTime      @default(now())
+  logs      WorkoutLog[]  // new line: relation to logs
+}
+
+model WorkoutLog {
+  id        Int          @id @default(autoincrement())
+  date      DateTime
+  plan      WorkoutPlan  @relation(fields: [planId], references: [id])
+  planId    Int
+}
