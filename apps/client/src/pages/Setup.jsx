@@ -1,12 +1,32 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-console.log("Selected days:", days);
+
 
 
 export default function Setup() {
-    const [goal, setGoal] = useState("");
-    const [equipment, setEquipment] = useState("");
-    const [days, setDays] = useState([]);
+  const [goal, setGoal] = useState("");
+  const [days, setDays] = useState([]);
+  const [equipment, setEquipment] = useState("");
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!goal || days.length === 0) {
+      alert("Please select a goal and at least one workout day.");
+      return;
+    }
+
+    const setupData = {
+      goal,
+      days,
+      equipment,
+    };
+
+    console.log("User setup data:", setupData);
+
+    // TODO: send to backend or navigate
+  };
+
 
 
   return (
@@ -63,9 +83,10 @@ export default function Setup() {
             onChange={(e) => setEquipment(e.target.value)}
         />
         </div>
-        <Button type="button" variant="default" className="w-full">
-            Start Plan
+        <Button type="button" onClick={handleSubmit} className="w-full">
+          Start Plan
         </Button>
+
       </div>
     </div>
   );
