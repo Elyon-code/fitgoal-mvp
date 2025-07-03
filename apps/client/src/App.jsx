@@ -2,6 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { Button } from "@/components/ui/button";
+
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
       style={{ height: '100vh', width: '100vw', backgroundColor: '#6b21a8' }} // custom purple
     >
       Tailwind is working!
+      <Button variant="default">Click me</Button>
     </div>
   );
 }
